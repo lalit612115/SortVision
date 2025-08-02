@@ -29,16 +29,5 @@ This project is built using a simple and classic web stack:
 - **CSS3**: For styling, animations, and a modern user interface.
 - **JavaScript (ES6+)**: The core logic for all sorting algorithms, canvas drawing, and user interactions.
 
-## 🛠️ Getting Started
 
-To get a local copy of this project up and running, follow these simple steps.
 
-### Prerequisites
-
-You only need a modern web browser to run this project. No other software is required.
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone [https://github.com/your-username/your-repository-name.git](https://github.com/your-username/your-repository-name.git)
