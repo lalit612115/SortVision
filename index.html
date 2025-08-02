@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Algorithm Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Sorting Algorithm Visualizer</h1>
+    </header>
+
+    <div class="controls-container">
+        <div class="control-group">
+            <label for="algorithm-select">Algorithm:</label>
+            <select id="algorithm-select">
+                <option value="bubbleSort">Bubble Sort</option>
+                <option value="selectionSort">Selection Sort</option>
+                <option value="insertionSort">Insertion Sort</option>
+                <option value="mergeSort">Merge Sort</option>
+                <option value="quickSort">Quick Sort</option>
+                <option value="heapSort">Heap Sort</option>
+                <option value="shellSort">Shell Sort</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label for="array-size-slider">Array Size:</label>
+            <input type="range" id="array-size-slider" min="10" max="200" value="50">
+            <span id="array-size-value">50</span>
+        </div>
+
+        <div class="control-group">
+            <label for="speed-slider">Speed:</label>
+            <input type="range" id="speed-slider" min="1" max="500" value="100">
+            <span id="speed-value">100 ms</span>
+        </div>
+
+        <div class="button-group">
+            <button id="generate-btn">New Array</button>
+            <button id="start-btn">Start</button>
+            <button id="pause-btn" disabled>Pause</button>
+            <button id="next-btn" disabled>Next Step</button>
+        </div>
+    </div>
+
+    <main>
+        <canvas id="visualizer-canvas"></canvas>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Sorting Visualizer Project</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

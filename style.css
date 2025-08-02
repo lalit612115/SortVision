@@ -1,0 +1,84 @@
+:root {
+    --primary-color: #3498db;
+    --background-color: #2c3e50;
+    --text-color: #ecf0f1;
+    --control-bg: #34495e;
+    --button-bg: #2980b9;
+    --button-hover: #3498db;
+    --highlight-color: #e74c3c;
+    --swap-color: #f1c40f;
+    --sorted-color: #2ecc71;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+header, footer {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+    background-color: var(--control-bg);
+}
+
+h1 {
+    margin: 0;
+}
+
+.controls-container {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    background-color: var(--control-bg);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.control-group label {
+    white-space: nowrap;
+}
+
+.button-group button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: var(--button-bg);
+    color: var(--text-color);
+    transition: background-color 0.3s ease;
+}
+
+.button-group button:hover {
+    background-color: var(--button-hover);
+}
+
+.button-group button:disabled {
+    background-color: #7f8c8d;
+    cursor: not-allowed;
+}
+
+#visualizer-canvas {
+    border: 2px solid var(--primary-color);
+    margin-top: 2rem;
+    background-color: #34495e;
+}
+
+footer {
+    margin-top: auto; /* Pushes the footer to the bottom */
+}
