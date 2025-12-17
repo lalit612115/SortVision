@@ -116,7 +116,103 @@ document.addEventListener('DOMContentLoaded', () => {
             yield { type: 'insert', indices: [j + 1] };
         }
     }
-    // Add other generator algorithms here
+
+    function* mergeSort(left = 0, right = array.length - 1) {
+        if (left < right) {
+            let mid = Math.floor((left + right) / 2);
+            yield* mergeSort(left, mid);
+            yield* mergeSort(mid + 1, right);
+            yield* merge(left, mid, right);
+        }
+    }
+
+    function* merge(left, mid, right) {
+        let n1 = mid - left + 1;
+        let n2 = right - mid;
+        let L = array.slice(left, mid + 1);
+        let R = array.slice(mid + 1, right + 1);
+        let i = 0, j = 0, k = left;
+        while (i < n1 && j < n2) {
+            yield { type: 'compare', indices: [left + i, mid + 1 + j] };
+            if (L[i] <= R[j]) {
+                array[k] = L[i];
+                i++;
+            } else {
+                array[k] = R[j];
+                j++;
+            }
+            yield { type: 'insert', indices: [k] };
+            k++;
+        }
+        while (i < n1) {
+            array[k] = L[i];
+            yield { type: 'insert', indices: [k] };
+            i++;
+            k++;
+        }
+        while (j < n2) {
+            array[k] = R[j];
+            yield { type: 'insert', indices: [k] };
+            j++;
+            k++;
+        }
+    }
+
+    function* quickSort(low = 0, high = array.length - 1) {
+        if (low < high) {
+            let pi = yield* partition(low, high);
+            yield* quickSort(low, pi - 1);
+            yield* quickSort(pi + 1, high);
+        }
+    }
+
+    function* partition(low, high) {
+        let pivot = array[high];
+        let i = low - 1;
+        for (let j = low; j < high; j++) {
+            yield { type: 'compare', indices: [j, high] };
+            if (array[j] < pivot) {
+                i++;
+                [array[i], array[j]] = [array[j], array[i]];
+                yield { type: 'swap', indices: [i, j] };
+            }
+        }
+        [array[i + 1], array[high]] = [array[high], array[i + 1]];
+        yield { type: 'swap', indices: [i + 1, high] };
+        return i + 1;
+    }
+
+    function* heapSort() {
+        // Build max heap
+        for (let i = Math.floor(array.length / 2) - 1; i >= 0; i--) {
+            yield* heapify(i, array.length);
+        }
+        // Extract elements
+        for (let i = array.length - 1; i > 0; i--) {
+            [array[0], array[i]] = [array[i], array[0]];
+            yield { type: 'swap', indices: [0, i] };
+            yield* heapify(0, i);
+        }
+    }
+
+    function* heapify(i, n) {
+        let largest = i;
+        let left = 2 * i + 1;
+        let right = 2 * i + 2;
+        if (left < n && array[left] > array[largest]) {
+            yield { type: 'compare', indices: [left, largest] };
+            largest = left;
+        }
+        if (right < n && array[right] > array[largest]) {
+            yield { type: 'compare', indices: [right, largest] };
+            largest = right;
+        }
+        if (largest !== i) {
+            [array[i], array[largest]] = [array[largest], array[i]];
+            yield { type: 'swap', indices: [i, largest] };
+            yield* heapify(largest, n);
+        }
+    }
 
     const runStep = () => {
         if (!sortGenerator) {
@@ -130,6 +226,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     break;
                 case 'insertionSort':
                     sortGenerator = insertionSort();
+                    break;
+                case 'mergeSort':
+                    sortGenerator = mergeSort();
+                    break;
+                case 'quickSort':
+                    sortGenerator = quickSort();
+                    break;
+                case 'heapSort':
+                    sortGenerator = heapSort();
                     break;
                 // Add other algorithms here
             }
